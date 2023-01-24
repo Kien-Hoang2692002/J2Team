@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra số</title>
+    <style>
+        #div_form{
+            width: 500px;
+            height: 500px;
+             background-color: aqua; 
+            text-align: center;
+            margin-top: 50px;
+            margin-left: 300px;
+        }
+        /* #div_form > #div_h1{
+
+        }
+        #div_form > #div_nhap{
+
+        }
+
+        #div_form > #ket_qua{
+
+        } */
+
+    </style>
+</head>
+<body>
+    <div id="div_form">
+        <form action="">
+            <div id="div_h1">
+                <h1>Kiểm tra số</h1>
+            </div>
+           
+            <div id="div_nhap">
+                Nhập số: 
+                <input type="number" name="" id="input_so" placeholder="Nhập tại đây">
+                <button onclick="in_ra_so()" type="button" id="enter">
+                    Nhấn Enter
+                </button>
+            </div>
+            
+            <div id="ket_qua"> </div>
+            <div id="ket_qua_1"> </div>
+            <div id="ket_qua_2"> </div>
+            <div id="ket_qua_3"> </div>
+       
+        </form>
+    </div>
+
+    <script>
+        let input = document.getElementById("input_so");
+        input.addEventListener("keydown" , function(event){
+            if(event.keyCode === 13){
+                event.preventDefault();
+                document.getElementById('enter').click();
+            }
+        })
+        
+        var count = 0;
+        function in_ra_so(){
+            
+            let so = parseFloat(document.getElementById('input_so').value);
+            // Kiểm tra chẵn lẻ 
+            if(Number.isInteger(so))
+            {
+
+                if(so%2 === 0 ){
+                    document.getElementById('ket_qua').innerHTML = so + ' là sô chẵn';
+                }else{
+                    document.getElementById('ket_qua').innerHTML = so  + ' là số lẻ';
+                }
+            }else {
+              document.getElementById('ket_qua').innerHTML = so + ' là số thập phân';
+             } 
+
+             //Kiểm tra số nguyên tố 
+             if(Number.isInteger(so)){
+                 if( so < 2.0 ){
+                    document.getElementById('ket_qua_1').innerHTML = so + ' không là số nguyên tố';
+                 }else{
+                    let dem = 0 ;
+                    for(let i = 2 ; i <= Math.sqrt(so) ; i++){
+                        if(so%i === 0){
+                            dem++;
+                        }
+                    }
+                    if(dem === 0){
+                        document.getElementById('ket_qua_1').innerHTML = so + ' là số nguyên tố';
+                    }else{
+                        document.getElementById('ket_qua_1').innerHTML = so + ' không là số nguyên tố';
+                    }
+                 }
+             }else {
+              document.getElementById('ket_qua_1').innerHTML = so + ' không là số nguyên tố';
+             } 
+
+             // In số từ number đến 1
+             if( so > 0){
+                for(let i = 1 ; i <= so ; i++){
+                    document.getElementById('ket_qua_2').innerHTML += (i + " ");
+                }
+                if(Number.isInteger(so) === false)
+                    document.getElementById('ket_qua_2').innerHTML += (so);
+             }else{
+                if(Number.isInteger(so) === false)
+                    document.getElementById('ket_qua_2').innerHTML += (so);
+                for(let i = 1; i >= so ; so++){
+                    document.getElementById('ket_qua_2').innerHTML += (" "+ Math.ceil(so));
+                }
+             }
+            
+             count += 1 ;
+            document.getElementById('ket_qua_3').innerHTML = 'Bạn đã nhập ' + count +' lần' ;
+            }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngay Trong Thang</title>
+    <style >
+        
+        #form_tong{
+            text-align: center;
+            width: 500px;
+            height: 100%;
+            margin-left: 500px;
+            margin-top: 100px;
+            background-color: yellow;
+        }
+        #form_tong > .div_h1{
+            background: rgb(217, 167, 39);
+        }
+        #form_tong > .div_nhap{
+            
+        }
+        #form_tong > #ket_qua{
+            background-color: rgb(223, 214, 214);
+            width: 50%;
+            margin-left: 125px;
+            border-radius: 10%;
+            border: 1px solid rgb(85, 82, 82);        
+        }
+
+
+    </style>
+</head>
+<body>
+    <form action="" id="form_tong">
+        <div class="div_h1">
+            <h1>TÍNH NGÀY TRONG THÁNG</h1>
+        </div>
+        <div class="div_nhap">
+
+            Nhập tháng / năm :
+            <input type="number" id="input_thang">
+            /
+            <input type="text" id="input_nam">
+            <br>
+            <br>
+            <button onclick="in_ra()" type="button">
+                Kiểm tra số ngày trong tháng theo năm
+            </button>
+        </div>
+        <br>
+        <div id="ket_qua">
+
+        </div>
+    </form>
+
+    
+
+    <script>
+        // parseInt : ép về kiểu số nguyên
+        // parseFloat : ép về kiểu số thực
+
+        function in_ra(){
+            let thang = parseInt(document.getElementById('input_thang').value );
+            let nam = parseInt(document.getElementById('input_nam').value);
+            let ngay ;
+            switch(thang){
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                     ngay = 31;
+                     break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                     ngay = 30;
+                     break;
+                case 2:
+                    if( (nam%400 == 0 ) || (nam%4==0 && nam%100!=0) ){
+                        ngay = 29 ;
+                    }else{
+                        ngay = 28 ;
+                    }
+                    break;
+                default : 
+                        ngay = 'sai';
+                        break ;
+            }
+            document.getElementById('ket_qua').innerHTML = 'Tháng '+ thang + ' năm ' + nam + ' có ' + ngay;
+        }
+    </script>
+</body>
+</html>

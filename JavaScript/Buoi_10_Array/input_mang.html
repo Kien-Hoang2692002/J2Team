@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="">
+        Nhập số
+        <input type="text" name="" id="input_so">
+        <br>
+        <button type="button" onclick="nhap()">Nhập</button>
+        <button type="button" onclick="in_ra()">In ra danh sách đã nhập</button>
+    
+    </form>
+    <div id="ket_qua">
+
+    </div>
+
+    <script>
+        
+        let mang = [] ;
+        function nhap(){          
+            let so = parseFloat(document.getElementById('input_so').value);      
+            mang.push(so) ;
+            document.getElementById('input_so').value = '';
+        }
+        function in_ra(){
+            console.log(mang);
+            // document.getElementById('ket_qua').innerHTML = mang[0] ;
+            //document.getElementById('ket_qua').innerHTML = mang ;
+            let chuoi = '';
+            for( let i = 0 ; i < mang.length ; i++){
+                if( mang[i] %2 == 0){
+                    chuoi += mang[i] + '<br>';
+                }
+            }   
+            document.getElementById('ket_qua').innerHTML = chuoi ;
+        }
+    </script>
+
+</body>
+</html>

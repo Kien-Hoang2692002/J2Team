@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+       
+        Nhập tên của bạn
+        <input type="text" id="input_ten">
+        <br>
+        <button onclick="in_ra()" type="button">
+            Kiểm tra IQ
+        </button>
+    </form>
+
+    <div id="ket_qua">
+
+    </div>
+
+    <form action="">
+       
+        Nhập số
+        <input type="text" id="input_so">
+        <br>
+        <button onclick="in_ra_so()" type="button">
+            Kiểm tra chẵn lẻ
+        </button>
+
+    </form>
+
+    <div id="ket_qua2">
+
+    </div>
+
+    
+    
+    <script type="text/javascript">
+
+        function in_ra(){
+            let ten = document.getElementById('input_ten').value;
+            // document.write('Xin chào' + ten);
+            document.getElementById("ket_qua").innerHTML = "Xin chào "+ ten;
+        }
+
+        function in_ra_so(){
+            let so = document.getElementById('input_so').value;
+            if(so%2 == 0 ){
+                document.getElementById('ket_qua2').innerHTML = 'Đây là sô chẵn';
+            }else if(so%2 != 0){
+                document.getElementById('ket_qua2').innerHTML = 'Đây là số lẻ';
+            }else{
+                document.getElementById('ket_qua2').innerHTML = 'Đây là số thập phân';
+            }
+        }
+
+        // for( let i = 1 ; i<10 ; i++){
+        //     document.write(i);
+        // }
+   
+   </script>
+</body>
+</html>

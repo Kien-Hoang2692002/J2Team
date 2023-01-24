@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        Nhập số phần tử của mảng
+        <input type="text" name="" id="input_so">
+        <br>
+        <button type="button" onclick="phat_sinh()">
+            Phát sinh ra mảng
+        </button>
+    </form>
+    <div id="ket_qua">
+    </div>
+
+    <div id="ket_qua_max"></div>
+    <div id="ket_qua_min"></div>
+    <div id="ket_qua_tong"></div>
+    <div id="ket_qua_snt"></div>
+    <div id="in_mau" style="height: 500px; width:100px;
+    background-color: red;"></div>
+
+    <script>
+        function phat_sinh(){
+        let so = parseInt(document.getElementById('input_so').value);
+            let mang = [] ;
+            for (let i = 0 ; i < so ; i++){
+                so_ngau_nhien = Math.floor(Math.random()*20)
+                mang.push( so_ngau_nhien );
+            }
+            document.getElementById('ket_qua').innerHTML = mang ;
+
+            // Kiểm tra số lớn nhất
+            var max = mang[0] ;
+            for( let i = 0 ; i < mang.length ; i++){
+                if(mang[i] > max) {
+                    max = mang[i] ;
+                }
+            }
+            document.getElementById('ket_qua_max').innerHTML = 'Số lớn nhất : ' + max ;
+             // Kiểm tra số bé nhất
+             var min = mang[0] ;
+            for( let i = 0 ; i < mang.length ; i++){
+                if(mang[i] < min) {
+                    min = mang[i] ;
+                }
+            }
+            document.getElementById('ket_qua_min').innerHTML = 'Số bé nhất : ' + min ;
+            
+            //Tính tổng mảng
+            var sum = 0 ;
+            for( let i = 0 ; i < mang.length ; i++){
+                sum += mang[i];
+            }
+            document.getElementById('ket_qua_tong').innerHTML = 'Tổng mảng : ' + sum ;
+           
+            //Kiểm tra và in ra số nguyên tố
+           let nguyento= '';
+            for( let i = 0 ; i < mang.length ; i++){
+                    var flag = true ;
+                    if( mang[i] < 2) flag = false;
+                    else{
+                        for( let a = 2 ; a <mang[i] ; a++){
+                            if(mang[i] %a == 0){
+                                flag = false ;
+                                break;
+                            }
+                        }
+                    }
+                    if( flag == true ){
+                        nguyento += mang[i] + ' ';
+                    }else{
+                        nguyento += ' ';
+                    }
+            
+            }
+            document.getElementById('ket_qua_snt').innerHTML = 'Số nguyên tố : ' + nguyento;
+            
+            // Lấy mã màu và in
+            var ma_mau ;
+            while(so.length < 6){
+                ma_mau = '0' + so ;
+            }
+            ma_mau = '#' + ma_mau ;
+            
+            document.getElementById('in_mau').innerHTML= $`ma_mau`;
+            document.getElementById('in_mau').style.backgroundColor= ma_mau;
+
+
+        }
+           
+    </script>
+</body>
+</html>
