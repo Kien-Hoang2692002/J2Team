@@ -33,8 +33,9 @@
 <body>
     <div id = "tong">
        <?php include "menu.php" ?>
-       <?php include "products.php" ?>
+       <?php include "id.php" ?>
         <?php include "footer.php" ?>
+
 
     </div>
 </body>

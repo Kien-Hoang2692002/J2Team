@@ -41,5 +41,4 @@
     }else{
         header("location:form_update.php?id=$id&loi=Lỗi truy vấn");
     }
-   
 ?>

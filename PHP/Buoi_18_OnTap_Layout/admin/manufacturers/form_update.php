@@ -21,7 +21,9 @@
         $sql = "select * from manufacturers     
         where id = '$id' ";
         $result = mysqli_query($connect, $sql);
-        $each = mysqli_fetch_array($result);
+        $number_rows = mysqli_num_rows($result); 
+        if($number_rows === 1){
+            $each = mysqli_fetch_array($result);
 
     ?>
 
@@ -43,6 +45,9 @@
         <br>
         <button>Sửa</button>
 
+        <?php } else{ ?>
+            <h1> Không tìm thấy theo mã này </h1>
+        <?php } ?>
     </form>
 </body>
 </html>
