@@ -1,5 +1,7 @@
 <?php
 
+    require '../check_super_admin_login.php'; 
+
     // Kiểm tra lỗi 
     if( empty($_POST['name']) || empty($_POST['address'])   ||
     empty($_POST['phone']) ||empty($_POST['photo']) 

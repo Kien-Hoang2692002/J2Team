@@ -5,6 +5,7 @@
                         Trang chủ
                     </a>
                 </li>
+                <?php if(empty($_SESSION['id'])){ ?>
                 <li>
                     <a href="signin.php">
                         Đăng nhập
@@ -15,5 +16,19 @@
                         Đăng kí
                     </a>
                 </li>
+                <?php } else { ?>
+                    <li>
+                        <a href="view_cart.php">
+                            Xem giỏ hàng
+                        </a>
+                    </li>
+                    <li>
+                        Chào 
+                        <?php echo $_SESSION['name'] ?>,
+                        <a href="signout.php">
+                            Đăng xuất
+                        </a>
+                    </li>
+                    <?php } ?>
             </ol>
 </div>

@@ -8,8 +8,10 @@
 </head>
 <body>
     <?php
-        if(isset($_GET['error'])){
-            echo $_GET['error'];
+        session_start();
+        if(isset($_SESSION['error'])){
+            echo $_SESSION['error'];
+            unset($_SESSION['error']);
         }
     ?>
 
@@ -24,6 +26,12 @@
     <br>
     Mật khẩu
     <input type="password" name="password">
+    <br>
+    Số điện thoại
+    <input type="text" name="phone_number">
+    <br>
+    Địa chỉ
+    <input type="text" name="address">
     <br>
     <button>Đăng ký</button>
 </form>

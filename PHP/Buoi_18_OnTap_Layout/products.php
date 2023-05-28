@@ -19,13 +19,18 @@
             <h1>
                 <?php echo $each['name'] ?>
             </h1>
-            <img height="100px" src="admin/products/photo/<?php echo $each['photo']?>" alt="">
+            <img height="70px" src="admin/products/photo/<?php echo $each['photo']?>" alt="">
             <p>  <?php echo $each['price'] ?>$</p>
             <a href="product.php?id=<?php echo $each['id']?>">
                     Xem chi tiết >>>
             </a>
+            <?php if(!empty($_SESSION['id'])){ ?>
+                <br>
+                <a href="add_to_cart.php?id=<?php echo $each['id']?>">
+                    Thêm vào giỏ hàng
+                </a>
+            <?php } ?>
         </div>
-
     <?php endforeach ?>
 
 

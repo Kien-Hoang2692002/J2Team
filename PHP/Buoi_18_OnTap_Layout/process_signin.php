@@ -2,6 +2,11 @@
     
     $email = $_POST['email'];
     $password = $_POST['password'];
+    if(isset($_POST['remember'])){
+        $remember = true;
+    } else{
+        $remember = false;
+    }
 
     require 'admin/connect.php';
 
@@ -9,18 +14,29 @@
     where email = '$email' and password = '$password'";
     $result = mysqli_query($connect, $sql);
     $number_rows = mysqli_num_rows($result);
+    
     if($number_rows == 1){
-        session_start();
+        echo "Đăng nhập thành công";
+        session_start();  
         $each = mysqli_fetch_array($result);
-        $_SESSION['id'] = $each['id'] ;
+        $id = $each['id'] ;
+        $_SESSION['id'] =  $id;
         $_SESSION['name'] = $each['name']; 
-
-        header('location:user.php');
-        exit;
+        if($remember){
+            $token = uniqid('user_',true);
+            $sql = "update customers 
+            set
+            token = '$token'
+            where 
+            id = '$id' ";
+            mysqli_query($connect, $sql);
+            setcookie('remember', $token , time() + 60*60*24*30);
+        }
+        // header('location:user.php');
+        // exit;
+    }else{
+        header('location:signin.php?error=Đăng nhập sai rồi!');
     }
-
-    header('location:signin.php?error=Đăng nhập sai rồi!');
-
 
 
 
