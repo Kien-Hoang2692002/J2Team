@@ -41,5 +41,26 @@
         <?php include "footer.php" ?>
 
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-add-to-cart").click(function() { 
+                let id = $(this).data('id');
+                $.ajax({
+                    type: "GET",
+                    url: "add_to_cart.php",
+                    data: "id",
+                    success: function(response) {
+                        if(response==1){
+                            alert("thành công");
+                        }
+                        else {
+                            alert(response);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

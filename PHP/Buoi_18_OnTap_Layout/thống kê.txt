@@ -1,0 +1,59 @@
+
+1. Số đơn theo mốc thời gian(hôm nay, tuần này, tháng này )
+select count(*) from orders 
+where created_at > "";
+
+2. Số sản phẩm(bán chạy, không bán chạy)
+Cách 1:
+select products.id, products.name, 
+ifnull(sum(quantity),0) as quantity_sales
+from products
+left join order_product 
+on order_product.product_id = products.id
+left join orders
+on orders.id = order_product.order_id
+WHERE
+orders.status = 1 or orders.status is null
+group by products.id;
+Cách 2:
+select products.id, products.name, 
+(
+ 	SELECT 
+    ifnull(SUM(quantity),0)
+    from order_product
+    JOIN orders on orders.id = order_product.order_id
+    WHERE
+    order_product.product_id = products.id
+    and 
+    orders.status = 1
+) as quantity_sales
+from products;
+
+Không bán chạy:
+ORDER BY quantity_sales asc, products.id;
+
+3. Doanh thu theo mốc thời gian
+select SUM(total_price) 
+from orders
+WHERE status = 1;
+
+4. Số thành viên
+
+5. Khách hàng tiềm năng(số đơn khách đã đặt, số tiền khách đã trả)
+count(*): đếm bản ghi(tính cả null)
+
+select
+name,
+sum(total_price) as total_paid,
+COUNT(orders.customer_id)
+from customers
+left JOIN orders ON orders.customer_id = customers.id
+WHERE
+orders.status = 1 or orders.customer_id is null
+group by customers.id
+order by total_paid DESC;
+
+6. Sản phẩm theo hãng
+
+
+

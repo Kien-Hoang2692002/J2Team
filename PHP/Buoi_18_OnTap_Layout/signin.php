@@ -45,6 +45,9 @@
         <input type="checkbox" name="remember">
         <br>
         <button>Đăng nhập</button>
+        <a href="forgot_password.php">
+            Quên mật khẩu
+        </a>
     </form>
 
 </body>

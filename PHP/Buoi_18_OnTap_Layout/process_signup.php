@@ -24,6 +24,11 @@
     value('$name','$email','$password','$phone_number','$address')";
     mysqli_query($connect, $sql);
 
+    // require 'mail.php';
+    // $title = "Đăng kí thành công";
+    // $content ="Chúc mừng đăng kí thành công";
+    // send_mail($email,$name,$title,$content);
+
     // Lưu lại trong session những gì hay truy vấn 
     // session: server chủ
     $sql = "select id from customers where email = '$email'";

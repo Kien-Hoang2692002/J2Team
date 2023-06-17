@@ -26,9 +26,16 @@
             </a>
             <?php if(!empty($_SESSION['id'])){ ?>
                 <br>
-                <a href="add_to_cart.php?id=<?php echo $each['id']?>">
+                <button  
+                    data-id="<?php echo $each['id']?>"
+                    class="btn-add-to-cart"
+                >
                     Thêm vào giỏ hàng
-                </a>
+                </button>
+
+                <!-- <a href="add_to_cart.php?id=">
+                    Thêm vào giỏ hàng
+                </a>  -->
             <?php } ?>
         </div>
     <?php endforeach ?>

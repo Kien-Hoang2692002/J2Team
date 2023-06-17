@@ -1,8 +1,11 @@
 
 <?php
+try {
     session_start();
-    // unset($_SESSION['cart']);
-
+    //unset($_SESSION['cart']);
+    // if(empty($_GET['id'])){
+    //     throw new Exception("Không tồn tại id");  
+    // }
     $id = $_GET['id'];
 
     if(empty($_SESSION['cart'][$id])){
@@ -21,8 +24,11 @@
     }else{
         $_SESSION['cart'][$id]['quantity']++;    
     }
-print_r($_SESSION['cart']);
-
-
+    echo 1;
+    //print_r($_SESSION['cart']);
+} catch (Throwable $th) {
+    echo $th->getMessage();
+}
+    
 
 ?>

@@ -11,7 +11,7 @@
    <?php
     session_start();
     $cart = $_SESSION['cart'];
-    $sum = 0;
+    $total= 0;
     ?>
 
     <table border="1" width="100%" >
@@ -27,27 +27,55 @@
             <tr>
                 <td><img height="100px" src="admin/products/photo/<?php echo $each['photo']?>" alt=""></td>
                 <td><?php echo $each['name']?></td>
-                <td><?php echo $each['price']?></td>
                 <td>
-                    <a href="update_quantity_in_cart.php?id=<?php echo $id ?>$type=decrease">
+                    <span class="span-price">
+                        <?php echo $each['price']?>
+                    </span>
+                </td>
+                <td>
+                    <!-- <a href="update_quantity_in_cart.php?id=<?php echo $id ?>$type=decrease">
                         -
-                    </a>
-                    <?php echo $each['quantity']?>
-                    <a href="update_quantity_in_cart.php?id=<?php echo $id ?>&type=increase">
+                    </a> -->
+                    <button 
+                        class="btn-update-quantity" 
+                        data-id='<?php echo $id ?>'
+                        data-type='decrease'
+                    >
+                        -
+                    </button>
+                    <span class="span-quantity">
+                        <?php echo $each['quantity']?>
+                    </span>
+                    <!-- <a href="update_quantity_in_cart.php?id=<?php echo $id ?>&type=increase">
                         +
-                    </a>
+                    </a> -->
+                    <button 
+                        class="btn-update-quantity" 
+                        data-id='<?php echo $id ?>'
+                        data-type='increase'
+                    >
+                        +
+                    </button>
                 </td>
                 <td>
-                    <?php   
-                        $result =  $each['price']* $each['quantity'];
-                        echo $result;
-                        $sum += $result;
-                    ?>
+                    <span class="span-sum">
+                        <?php   
+                            $sum =  $each['price']* $each['quantity'];
+                            $total += $sum;
+                            echo $sum;
+                        ?>
+                    </span>
                 </td>
                 <td>
-                    <a href="delete_from_cart.php?id=<?php echo $id ?>">
+                    <button 
+                        class="btn-delete"
+                        data-id="<?php echo $id ?>"
+                    >
                         X
-                    </a>
+                    </button>
+                    <!-- <a href="delete_from_cart.php?id=<?php echo $id ?>">
+                        X
+                    </a> -->
                 </td>
             </tr>
 
@@ -55,7 +83,9 @@
     </table>
     <h1>
         Tổng tiền hóa đơn:
-        $<?php echo $sum ?>
+        <span id="span-total">
+            $<?php echo $total ?>
+        </span>
     </h1>
 
     <?php
@@ -78,5 +108,63 @@
         <br>
         <button>Đặt hàng</button>
     </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+           $(".btn-update-quantity").click(function () { 
+            let btn = $(this);
+            let id = btn.data('id');
+            let type = btn.data('type');
+            
+            $.ajax({
+                type: "GET",
+                url: "update_quantity_in_cart.php",
+                data: {id, type},
+                success: function (response) {
+                    let parent_tr = btn.parents('tr');
+                    let price = parent_tr.find('.span-price').text();
+                    let quantity = parent_tr.find('.span-quantity').text();
+                    if(type == "increase"){
+                        quantity++;
+                    }else{
+                        quantity--;   
+                    }
+                    if(quantity === 0){
+                        parent_tr.remove();
+                    }else{
+                        parent_tr.find('.span-quantity').text(quantity);
+                        let sum = price * quantity;
+                        parent_tr.find('.span-sum').text(sum);
+                        getTotal();
+                    }  
+                }
+            });
+           });
+           // Bắt sự kiện khi bấm delete
+           $(".btn-delete").click(function () { 
+            let btn = $(this);
+            let id = btn.data('id');
+            
+            $.ajax({
+                type: "GET",
+                url: "delete_from_cart.php",
+                data: id,
+                success: function (response) {
+                     btn.parents('tr').remove();
+                     getTotal();
+                }
+            });
+            
+           });
+        });
+        function getTotal(){
+            let total = 0;
+            $(".span-sum").each(function () { 
+                total += parseFloat($(this).text());
+            });
+            $("#span-total").text(total);
+        }
+    </script>
 </body>
 </html>
